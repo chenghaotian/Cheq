@@ -28,16 +28,16 @@
 
 -  Graphical input window
 
--  ** languages other than Chinese are not supported**
+-  **languages other than Chinese are not supported**
 
--  ** no description**
+-  **no description**
 
--  ** calculation of more than 4 chemical equations is not supported**
+-  **calculation of more than 4 chemical equations is not supported**
 
--  Date of preparation_ Jan.31 2022_
+-  Date of preparation _Jan.31 2022_
 
 ### V0.12
 
--  ** updated comments**
+-  **updated comments**
 
-- Date of preparation_ Feb.1 2022_
+- Date of preparation _Feb.1 2022_
