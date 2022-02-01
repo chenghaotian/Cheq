@@ -1,4 +1,4 @@
-化学方程式求解 V 0.11
+化学方程式求解 V0.12
 左边式子
 右边式子
 错误
@@ -14,3 +14,8 @@
 无法解析,请检查
 不支持四位以上运算
 对不起,运算集太小
+请将化学式这样书写
+例:K₂MnO₄+Ca(OH)₂ --> k2mn1o4+ca1o2h2(均小写)
+欢迎访问: github.com/chenghaotian
+欢迎访问: gitee.com/sky-eye
+欢迎致信: dboycht@qq.com

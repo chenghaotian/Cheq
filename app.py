@@ -8,14 +8,15 @@ E-mail: dboycht@qq.com
 Welcome to visit my gitee or github!
 gitee: gitee.com/sky-eye
 github: github.com/chenghaotian
-Version: 0.11
-Time: Jan.31 2022
+Version: 0.12
+Time: Feb.1 2022
 Environment: python 3.9.0
 Update Log:
 $#%  0.11 
      !: Only four formulas are supported
      !: Only supports Chinese
-$#% -----
+$#%  0.12 
+     !: Update About
 """
 
 U_L = ["Q", "W", "E", "R", "T", "Y", "U", "I",
@@ -80,7 +81,6 @@ def main(ld: str, rd: str):
             oi.append(list(io.values()))
         l_new[oj] = oi
     l_dict = l_new
-    print(l_dict)
     nu = "123456789"
     every_number = list(itertools.product(nu, repeat=int(len(a) + len(b))))
 
@@ -115,7 +115,6 @@ def main(ld: str, rd: str):
                 str_r = str_r + f"{l_r[aij]}*{qwer_r[aij]}" + "+"
             str_l = str_l.strip("+")
             str_r = str_r.strip("+")
-            print(str_r, str_l)
             if eval(str_l) != eval(str_r):
                 error_num += 1
             else:
@@ -130,140 +129,142 @@ def main(ld: str, rd: str):
 # "KMnO₄", "O₂+MnO₂+K₂MnO₄" ->
 # [{"K": 1, Mn:1, "O":4}, {**}]   同   是否有错   原因
 def change_data(data_l: str, data_r: str):
-    if data_l == "\n" or data_r == "\n":
-        # 判断是否为空
-        print("空的")
-        return [], [], False, 0
-    elif if_i(data_l[0]) or if_i(data_r[0]):
-        # 判断是否为数字开头
-        print("数字开头")
-        return [], [], False, 2
-    elif if_s(data_l[-1]) or if_s(data_r[-1]):
-        print(data_l[-1], data_r[-1])
-        # 判断是否为文字结尾
-        print("文字结尾")
-        return [], [], False, 2
-    else:
-        not_n = 0
-        for a in data_l + data_r:
-            if a not in U_L:
-                not_n += 1
-            else:
-                not_n += 0
-        if not_n >= 1:
-            print("不支持的文字")
+    try:
+        if data_l == "\n" or data_r == "\n":
+            # 判断是否为空
+            print("空的")
+            return [], [], False, 0
+        elif if_i(data_l[0]) or if_i(data_r[0]):
+            # 判断是否为数字开头
+            print("数字开头")
             return [], [], False, 2
-
-        not_n = 0
-        for la in range(0, int(len(data_l)) - 2):
-            if data_l[la] != "+":
-                if if_i(data_l[la]) == if_i(data_l[la + 1]) == if_i(data_l[la + 2]):
-                    not_n += 1
-        for la in range(0, int(len(data_r)) - 2):
-            if data_r[la] != "+":
-                if if_i(data_r[la]) == if_i(data_r[la + 1]) == if_i(data_r[la + 2]):
-                    not_n += 1
-        if not_n > 0:
-            print("元素错误或数值过大")
+        elif if_s(data_l[-1]) or if_s(data_r[-1]):
+            # 判断是否为文字结尾
+            print("文字结尾")
             return [], [], False, 2
+        else:
+            not_n = 0
+            for a in data_l + data_r:
+                if a not in U_L:
+                    not_n += 1
+                else:
+                    not_n += 0
+            if not_n >= 1:
+                print("不支持的文字")
+                return [], [], False, 2
 
-        # 文字转列表
-        # -cut
-        data_l = data_l.split("+")
-        l_list = list(filter(lambda x: x != "+", data_l))
-        data_r = data_r.split("+")
-        r_list = list(filter(lambda x: x != "+", data_r))
+            not_n = 0
+            for la in range(0, int(len(data_l)) - 2):
+                if data_l[la] != "+":
+                    if if_i(data_l[la]) == if_i(data_l[la + 1]) == if_i(data_l[la + 2]):
+                        not_n += 1
+            for la in range(0, int(len(data_r)) - 2):
+                if data_r[la] != "+":
+                    if if_i(data_r[la]) == if_i(data_r[la + 1]) == if_i(data_r[la + 2]):
+                        not_n += 1
+            if not_n > 0:
+                print("元素错误或数值过大")
+                return [], [], False, 2
 
-        l_r = []
-        r_r = []
-        for cut_l in l_list:
-            l_dict = {}
-            l_k_list = []
-            l_v_list = []
-            jump = 0
-            for a in range(0, len(cut_l)):
-                if jump == 0:
-                    if if_s(cut_l[a]):
-                        if if_s(cut_l[a + 1]):
-                            l_k_list.append(cut_l[a:a + 1])
-                            jump += 1
-                        else:
-                            l_k_list.append(cut_l[a])
-                    else:
-                        if a != len(cut_l) - 1:
-                            if if_i(cut_l[a + 1]):
-                                l_v_list.append(cut_l[a:a + 1])
+            # 文字转列表
+            # -cut
+            data_l = data_l.split("+")
+            l_list = list(filter(lambda x: x != "+", data_l))
+            data_r = data_r.split("+")
+            r_list = list(filter(lambda x: x != "+", data_r))
+
+            l_r = []
+            r_r = []
+            for cut_l in l_list:
+                l_dict = {}
+                l_k_list = []
+                l_v_list = []
+                jump = 0
+                for a in range(0, len(cut_l)):
+                    if jump == 0:
+                        if if_s(cut_l[a]):
+                            if if_s(cut_l[a + 1]):
+                                l_k_list.append(cut_l[a:a + 1])
                                 jump += 1
+                            else:
+                                l_k_list.append(cut_l[a])
+                        else:
+                            if a != len(cut_l) - 1:
+                                if if_i(cut_l[a + 1]):
+                                    l_v_list.append(cut_l[a:a + 1])
+                                    jump += 1
+                                else:
+                                    l_v_list.append(cut_l[a])
                             else:
                                 l_v_list.append(cut_l[a])
-                        else:
-                            l_v_list.append(cut_l[a])
-                else:
-                    jump = 0
-            for a in range(0, len(l_k_list)):
-                l_dict[l_k_list[a]] = int(l_v_list[a])
-            l_r.append(l_dict)
-
-        for cut_r in r_list:
-            r_dict = {}
-            r_k_list = []
-            r_v_list = []
-            jump = 0
-            for a in range(0, len(cut_r)):
-                if jump == 0:
-                    if if_s(cut_r[a]):
-                        if if_s(cut_r[a + 1]):
-                            r_k_list.append(cut_r[a: a + 1])
-                            jump += 1
-                        else:
-                            r_k_list.append(cut_r[a])
                     else:
-                        if a != len(cut_r) - 1:
-                            if if_i(cut_r[a + 1]):
-                                r_v_list.append(cut_r[a: a + 1])
+                        jump = 0
+                for a in range(0, len(l_k_list)):
+                    l_dict[l_k_list[a]] = int(l_v_list[a])
+                l_r.append(l_dict)
+
+            for cut_r in r_list:
+                r_dict = {}
+                r_k_list = []
+                r_v_list = []
+                jump = 0
+                for a in range(0, len(cut_r)):
+                    if jump == 0:
+                        if if_s(cut_r[a]):
+                            if if_s(cut_r[a + 1]):
+                                r_k_list.append(cut_r[a: a + 1])
                                 jump += 1
                             else:
-                                r_v_list.append(cut_r[a])
+                                r_k_list.append(cut_r[a])
                         else:
-                            r_v_list.append(cut_r[a])
-                else:
-                    jump = 0
-            for a in range(0, len(r_k_list)):
-                r_dict[r_k_list[a]] = int(r_v_list[a])
-            r_r.append(r_dict)
-        # 检查式子个数 -大于5
-        if len(l_r) >= 5 or len(r_r) >= 5:
-            return [], [], False, 3
-        else:
-            # 质量守恒
-            key_l_list = []
-            for mc in l_r:
-                key_l_list.append(list(mc.keys()))
-            l_keys = []
-            for a in key_l_list:
-                for b in a:
-                    if b not in l_keys:
-                        l_keys.append(b)
+                            if a != len(cut_r) - 1:
+                                if if_i(cut_r[a + 1]):
+                                    r_v_list.append(cut_r[a: a + 1])
+                                    jump += 1
+                                else:
+                                    r_v_list.append(cut_r[a])
+                            else:
+                                r_v_list.append(cut_r[a])
                     else:
-                        pass
+                        jump = 0
+                for a in range(0, len(r_k_list)):
+                    r_dict[r_k_list[a]] = int(r_v_list[a])
+                r_r.append(r_dict)
+            # 检查式子个数 -大于5
+            if len(l_r) >= 5 or len(r_r) >= 5:
+                return [], [], False, 3
+            else:
+                # 质量守恒
+                key_l_list = []
+                for mc in l_r:
+                    key_l_list.append(list(mc.keys()))
+                l_keys = []
+                for a in key_l_list:
+                    for b in a:
+                        if b not in l_keys:
+                            l_keys.append(b)
+                        else:
+                            pass
 
-            key_r_list = []
-            for mc in r_r:
-                key_r_list.append(list(mc.keys()))
-            r_keys = []
-            for a in key_r_list:
-                for b in a:
-                    if b not in r_keys:
-                        r_keys.append(b)
-                    else:
-                        pass
-            for a in l_keys:
-                if a not in r_keys:
-                    return [], [], False, 1
-            for a in r_keys:
-                if a not in l_keys:
-                    return [], [], False, 1
-            return l_r, r_r, True, 0
+                key_r_list = []
+                for mc in r_r:
+                    key_r_list.append(list(mc.keys()))
+                r_keys = []
+                for a in key_r_list:
+                    for b in a:
+                        if b not in r_keys:
+                            r_keys.append(b)
+                        else:
+                            pass
+                for a in l_keys:
+                    if a not in r_keys:
+                        return [], [], False, 1
+                for a in r_keys:
+                    if a not in l_keys:
+                        return [], [], False, 1
+                return l_r, r_r, True, 0
+    except IndexError:
+        return [], [], False, 5
 
 
 if __name__ == '__main__':

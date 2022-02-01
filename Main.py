@@ -9,13 +9,15 @@ E-mail: dboycht@qq.com
 Welcome to visit my gitee or github!
 gitee: gitee.com/sky-eye
 github: github.com/chenghaotian
-Version: 0.11
-Time: Jan.31 2022
+Version: 0.12
+Time: Feb.1 2022
 Environment: python 3.9.0
 Update Log:
 $#%  0.11 
      !: Only four formulas are supported
-     !: Only supports Chinese 
+     !: Only supports Chinese
+$#%  0.12 
+     !: Update About
 """
 
 # =======导入语言包=======
@@ -25,7 +27,7 @@ for line in open("./files/language.txt", encoding="utf-8").readlines():
 # =======窗口设置=========
 w = tk.Tk()
 w.title(string=lang_list[0])
-w.geometry("600x300")
+w.geometry("600x310")
 w.iconbitmap("./files/logo.ico")
 w.resizable(False, False)
 
@@ -57,6 +59,8 @@ def main():
             mb.showerror(lang_list[11], lang_list[14])
         elif yn_w[1] == 4:
             mb.showerror(lang_list[11], lang_list[15])
+        elif yn_w[1] == 5:
+            mb.showerror(lang_list[11], lang_list[3])
 
 
 # =======控件============
@@ -70,11 +74,51 @@ begin_button = tk.Button(w,
 begin_button.place(x=450, y=200)
 
 # 文本框
-input_left_eq = tk.Text(w, width=35, height=1, font=("SimSun", 16))
+input_left_eq = tk.Text(w, width=35, height=2, font=("SimSun", 16))
 input_left_eq.place(x=100, y=10)
-input_right_eq = tk.Text(w, width=35, height=1, font=("SimSun", 16))
+input_right_eq = tk.Text(w, width=35, height=2, font=("SimSun", 16))
 input_right_eq.place(x=100, y=90)
 
 # 备注
+label_left = tk.Label(w,
+                      text=lang_list[1],
+                      font=(lang_list[8], 12))
+label_left.place(x=20, y=15)
+label_right = tk.Label(w,
+                       text=lang_list[2],
+                       font=(lang_list[8], 12))
+label_right.place(x=20, y=100)
 
+label_warn = tk.Label(w,
+                      text=lang_list[5],
+                      font=(lang_list[8], 20),
+                      fg="red")
+
+label_warn.place(x=20, y=150)
+label_warn2 = tk.Label(w,
+                       text=lang_list[16],
+                       font=(lang_list[8], 12),
+                       fg="red")
+
+label_warn2.place(x=20, y=180)
+label_warn3 = tk.Label(w,
+                       text=lang_list[17],
+                       font=(lang_list[8], 12),
+                       fg="red")
+
+label_warn3.place(x=20, y=200)
+
+about1 = tk.Label(w,
+                  text=lang_list[18])
+about2 = tk.Label(w,
+                  text=lang_list[19])
+about3 = tk.Label(w,
+                  text=lang_list[20])
+about4 = tk.Label(w,
+                  text=lang_list[6])
+
+about1.place(x=20, y=220)
+about2.place(x=20, y=240)
+about3.place(x=20, y=260)
+about4.place(x=20, y=280)
 w.mainloop()
