@@ -8,7 +8,7 @@
 
 #### 联系方式
 - Email:dboycht@qq.com
-- Github:[Github](http://github.com/chenghaotia)
+- Github:[Github](http://github.com/chenghaotian)
 
 #### 更新日志
 ### V0.11
